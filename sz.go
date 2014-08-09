@@ -1,24 +1,11 @@
-// Package sz is an insufficiently tested and likely incorrect
-// implementation of a Reader/Writer for the Snappy framing format.
-// Use at your own risk; bug reports and test cases are welcome.
+// Package sz is an immature implementation of a Reader/Writer for the
+// Snappy framing format.  Use at your own risk; bug reports and test cases
+// are welcome.
 package sz
 
-// it would be good to restructure as a Reader/Writer that do as
-// little buffering as possible (Write always writes one or more
-// blocks, and Read only buffers if the block is larger than p),
-// then have convenience functions that wrap them in bufio
-// Reader/Writers. First, folks get the more useful interface of
-// bufio--if you're paying for buffering you might as well get
-// the full benefit. Second, the lower-level Reader/Writer are
-// useful in themselves if you don't want buffering.
-
-// skipping long incompressible uns (i.e., after n incompressible
-// blocks we stop trying to pack for a bit) would be a win for the
-// "just run it on anything, it's essentially free" aspect of
-// snappy.
-
 import (
-	"code.google.com/p/snappy-go/snappy"
+	//"code.google.com/p/snappy-go/snappy" // native Go
+	"github.com/twotwotwo/sz/snappy" // cgo
 	"errors"
 	"hash"
 	"hash/crc32"
@@ -111,10 +98,7 @@ func (w *Writer) Flush() error {
 	// Because we allocate MaxEncodedLen+8 up front, snappy.Encode
 	// should never need a new slice, so w.c[:n+4] should already
 	// be head followed by content, so we can make a single Write
-	// unless we had incompressible input. But don't rely on snappy's
-	// internal allocation behavior for correctness.
-	//
-	// (RF: we could vendor snappy-go to be able to rely on it.)
+	// unless we had incompressible input. 
 	isContiguous := !incompressible && cap(w.c) >= n+4 && &w.c[8] == &content[0]
 	if isContiguous {
 		_, err = w.w.Write(w.c[:n+4])
