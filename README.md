@@ -29,7 +29,7 @@ Some other things that could be fun:
 * Make a variant (no longer "snappy") accept a static dictionary for 
   compressing tiny blocks or binary-diffing small inputs.
 * Make a wrapper like this for [gipfeli][gipfeli], described as a 3x faster
-  -gzip 1: less speed but better compression than Snappy.
+  `gzip -1`: less speed but better compression than Snappy.
 * Link in Google's C++ snappy code. 
 
 Randall Farmer, 2014. `sz` is under an MIT license whose full text is in
