@@ -6,12 +6,13 @@ just want to encode and decode bare blocks, you don't need this; use [the
 snappy-go library][snappy-go].
 
 sz includes [a modified version of snappy-go][cport] with the encoding logic
-ported to C.  It's compiled into your binary: target systems do not need the
-snappy library, though building the package requires a C compiler targeting
-the right platform.  The port ran about 50% faster for my compressible
-test content.  It passes the original test suite, but that's all the
-assurance we have, so be aware.  If you want to revert to the pure-Go
-version, just edit the import statement in your copy of [sz.go][szgo].
+ported to C.  (This isn't the more optimized C++ Snappy code.) It's compiled 
+into your binary: target systems do not need the snappy library, though 
+building the package requires a C compiler targeting the right platform.  
+The port ran about 50% faster for my compressible test content.  It passes
+the original test suite, but that's all the assurance we have, so be aware.  
+If you want to revert to the pure-Go version, just edit the import statement 
+in your copy of [sz.go][szgo].
 
 In general, sz is not a mature, tested implementation. Some things that
 would be great:
