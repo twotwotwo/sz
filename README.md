@@ -5,7 +5,7 @@ for Google's [Snappy][snappy] compression algorithm from Go code.  If you
 just want to encode and decode bare blocks, you don't need this; use [the
 snappy-go library][snappy-go].
 
-sz includes [a modified version of snappy-go][cport] with the encoding logic ported to C.  (This isn't the more optimized C++ Snappy code.) It's compiled into your binary: target systems do not need the snappy library, though building the package requires a C compiler targeting the right platform.  The port ran about 50% faster for my compressible test content.  It passes the original test suite, but that's all the assurance we have, so be aware. If you want to revert to the pure-Go version, just edit the import statement  in your copy of [sz.go][szgo].
+sz includes [a modified version of snappy-go][cport] with snappy-go's encoding logic ported to C.  (This isn't the more optimized C++ Snappy code.) It's disabled by default; change the import statements in [sz.go][szgo] to use it. If used, it's compiled into your binary: target systems do not need the snappy library, though building the package requires a C compiler targeting the right platform.  The port ran about 50% faster for my compressible test content.  It passes the original test suite, but that's all the assurance we have, so be aware. .
 
 In general, sz is not a mature, tested implementation. Some things that
 would be great:
