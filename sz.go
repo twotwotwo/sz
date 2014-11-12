@@ -4,8 +4,8 @@
 package sz
 
 import (
-	//"code.google.com/p/snappy-go/snappy" // native Go
-	"github.com/twotwotwo/sz/snappy" // cgo
+	"code.google.com/p/snappy-go/snappy" // native Go
+	//"github.com/twotwotwo/sz/snappy" // cgo
 	"errors"
 	"hash"
 	"hash/crc32"
