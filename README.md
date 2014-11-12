@@ -1,5 +1,9 @@
 #sz
 
+Though this was fun to write, https://github.com/mreiferson/go-snappystream appears more complete and better tested. Go forth and compress!
+
+-------------------------------
+
 sz provides a `Reader` and `Writer` for using the [framing format][framing]
 for Google's [Snappy][snappy] compression algorithm from Go code.  If you
 just want to encode and decode bare blocks, you don't need this; use [the
